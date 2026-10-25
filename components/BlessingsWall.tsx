@@ -73,7 +73,7 @@ export default function BlessingsWall() {
         </h2>
         <div className="mx-auto my-3 h-[1px] w-28 bg-gradient-to-r from-transparent via-[#e8c98a] to-transparent" />
         <p className="font-serif italic text-base sm:text-lg text-white/70 max-w-xl mx-auto">
-          Leave your loving messages, advice, and prayers for Aarav and Ananya to treasure forever.
+          Leave your loving messages, advice, and prayers for Deepak and Pooja to treasure forever.
         </p>
       </div>
 

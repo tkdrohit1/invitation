@@ -49,27 +49,18 @@ function ensureFiles() {
         authorName: "Dadi & Dadaji",
         relation: "Grandparents",
         message:
-          "May Lord Shiva and Parvati shower both of you with eternal harmony, deep love, and prosperous years together. God bless you, our dearest children!",
+          "May Lord Shiva and Parvati shower both of you with eternal harmony, deep love, and prosperous years together. God bless you, Pooja and Deepak!",
         approved: true,
-        createdAt: new Date(Date.now() - 86400000 * 4).toISOString(),
-      },
-      {
-        id: "blessing-2",
-        authorName: "Kunal & Simran",
-        relation: "College Friends",
-        message:
-          "From study sessions in Delhi to the Royal Palaces of Udaipur! So thrilled for you two! Looking forward to setting the Sangeet dance floor on fire!",
-        approved: true,
-        createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+        createdAt: "2026-10-21T15:42:04.870Z",
       },
       {
         id: "blessing-3",
-        authorName: "The Kapoor Family",
+        authorName: "The Patel Family",
         relation: "Family Friends",
         message:
-          "Wishing Aarav and Ananya a lifetime of laughter, mutual understanding, and endless happiness. Counting down the days to the royal celebration!",
+          "Wishing Deepak and Pooja a lifetime of togetherness, laughter, and endless happiness. Counting down to the grand celebration on 24th November!",
         approved: true,
-        createdAt: new Date(Date.now() - 86400000 * 1).toISOString(),
+        createdAt: "2026-10-24T15:42:04.870Z",
       },
     ];
     fs.writeFileSync(BLESSINGS_FILE, JSON.stringify(initialBlessings, null, 2), "utf-8");
