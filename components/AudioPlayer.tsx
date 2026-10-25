@@ -92,7 +92,20 @@ export default function AudioPlayer() {
   };
 
   useEffect(() => {
+    const handlePlayRequest = () => {
+      setHasInteracted(true);
+      if (audioRef.current) {
+        audioRef.current
+          .play()
+          .then(() => setIsPlaying(true))
+          .catch(() => {});
+      }
+    };
+
+    window.addEventListener("play-wedding-music", handlePlayRequest);
+
     return () => {
+      window.removeEventListener("play-wedding-music", handlePlayRequest);
       stopAmbientSynth();
       if (audioContextRef.current) {
         audioContextRef.current.close().catch(() => {});
@@ -106,7 +119,7 @@ export default function AudioPlayer() {
         ref={audioRef}
         src={weddingConfig.music.audioUrl}
         loop
-        preload="none"
+        preload="auto"
         onEnded={() => setIsPlaying(false)}
       />
 

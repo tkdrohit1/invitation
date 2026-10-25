@@ -29,8 +29,8 @@ export const weddingConfig: WeddingConfig = {
     ivory: "#fcf8f2",
   },
   music: {
-    title: "Enchanted Vows (Ambient Flute & Sitar)",
-    artist: "Royal Symphony Ensemble",
+    title: "Royal Wedding Shehnai (Auspicious Dhun)",
+    artist: "Ustad Bismillah Khan",
     audioUrl: "/music/wedding-theme.mp3",
   },
   events: [

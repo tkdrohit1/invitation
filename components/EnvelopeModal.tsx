@@ -51,6 +51,11 @@ export default function EnvelopeModal({
         colors: ["#e8c98a", "#f5dfaa", "#ffffff", "#c89c4b"],
       });
 
+      // Start auspicious royal wedding music
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("play-wedding-music"));
+      }
+
       if (onOpen) onOpen();
     }
   };
@@ -58,6 +63,9 @@ export default function EnvelopeModal({
   const handleEnterSite = () => {
     sessionStorage.setItem("envelope_opened", "true");
     setIsDismissed(true);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("play-wedding-music"));
+    }
     if (onClose) onClose();
   };
 
