@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --maroon-dark: #1a0407;
+    --maroon-deep: #5c121e;
+    --maroon-light: #7a1928;
+    --gold: #e8c98a;
+    --gold-bright: #f5dfaa;
+    --gold-dark: #b8934d;
+    --ivory: #fcf8f2;
+  }
+}
+
+/* Typography Helpers */
+.font-heading {
+  font-family: var(--font-heading), serif;
+}
+
+.font-serif {
+  font-family: var(--font-serif), serif;
+}
+
+.font-script {
+  font-family: var(--font-script), cursive;
+}
+
+.font-sans {
+  font-family: var(--font-sans), sans-serif;
+}
+
+/* Gold Gradient Text */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #fbe8c7 0%, #e8c98a 50%, #c89c4b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-border {
+  border-image: linear-gradient(to right, rgba(232, 201, 138, 0.6), rgba(245, 223, 170, 0.2)) 1;
+}
+
+/* Custom Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #140205;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6d1624;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e8c98a;
+}
+
+/* Background Subtle Pattern */
+.maroon-stars-pattern {
+  background-color: #1a0407;
+  background-image: 
+    radial-gradient(circle at 50% 20%, rgba(92, 18, 30, 0.7) 0%, transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(232, 201, 138, 0.08) 0%, transparent 40%),
+    radial-gradient(2px 2px at 40px 60px, rgba(232, 201, 138, 0.5), transparent),
+    radial-gradient(2px 2px at 150px 180px, rgba(232, 201, 138, 0.4), transparent),
+    radial-gradient(1.5px 1.5px at 280px 120px, rgba(255, 255, 255, 0.4), transparent);
+  background-size: 100% 100%, 100% 100%, 300px 300px, 350px 350px, 400px 400px;
+}
+
+/* Shimmer Keyframe */
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, rgba(232,201,138,0.1) 0%, rgba(232,201,138,0.4) 50%, rgba(232,201,138,0.1) 100%);
+  background-size: 200% 100%;
+  animation: goldShimmer 3s infinite;
+}

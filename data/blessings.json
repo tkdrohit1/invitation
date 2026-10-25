@@ -1,0 +1,26 @@
+[
+  {
+    "id": "blessing-1",
+    "authorName": "Dadi & Dadaji",
+    "relation": "Grandparents",
+    "message": "May Lord Shiva and Parvati shower both of you with eternal harmony, deep love, and prosperous years together. God bless you, Pooja and Deepak!",
+    "approved": true,
+    "createdAt": "2026-10-21T15:42:04.870Z"
+  },
+  {
+    "id": "blessing-2",
+    "authorName": "Rohan & Megha",
+    "relation": "Close Friends",
+    "message": "So incredibly happy for both of you! Looking forward to joining you in Kaushambi and celebrating your Sangeet night!",
+    "approved": true,
+    "createdAt": "2026-10-23T15:42:04.870Z"
+  },
+  {
+    "id": "blessing-3",
+    "authorName": "The Verma Family",
+    "relation": "Family Friends",
+    "message": "Wishing Deepak and Pooja a lifetime of togetherness, laughter, and endless happiness. Counting down to the grand celebration on 24th November!",
+    "approved": true,
+    "createdAt": "2026-10-24T15:42:04.870Z"
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "rsvp-seed-1",
+    "guestName": "Rohit Verma & Family",
+    "emailOrPhone": "rohit@example.com",
+    "attending": "yes",
+    "guestCount": 3,
+    "dietaryPreference": "vegetarian",
+    "dietaryNotes": "No mushrooms please",
+    "eventsAttending": [
+      "mehendi",
+      "haldi",
+      "wedding",
+      "reception"
+    ],
+    "message": "Can't wait to celebrate with you both in Kaushambi!",
+    "createdAt": "2026-10-22T15:42:04.869Z"
+  },
+  {
+    "id": "rsvp-seed-2",
+    "guestName": "Dr. Alok & Meena Sen",
+    "emailOrPhone": "+91 98765 43210",
+    "attending": "yes",
+    "guestCount": 2,
+    "dietaryPreference": "jain",
+    "dietaryNotes": "Strict Jain meal",
+    "eventsAttending": [
+      "wedding",
+      "reception"
+    ],
+    "message": "Heartfelt congratulations to Deepak and Pooja!",
+    "createdAt": "2026-10-23T15:42:04.869Z"
+  }
+]
