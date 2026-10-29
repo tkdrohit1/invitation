@@ -3,12 +3,15 @@
 import React from "react";
 import { Home, Calendar, MapPin, Sparkles, MessageSquareHeart } from "lucide-react";
 import confetti from "canvas-confetti";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface MobileNavDockProps {
   onOpenEnvelope?: () => void;
 }
 
 export default function MobileNavDock({ onOpenEnvelope }: MobileNavDockProps) {
+  const { t } = useLanguage();
+
   const triggerCelebration = () => {
     confetti({
       particleCount: 60,
@@ -42,7 +45,7 @@ export default function MobileNavDock({ onOpenEnvelope }: MobileNavDockProps) {
           className="flex flex-col items-center gap-0.5 text-white/70 hover:text-[#e8c98a] transition"
         >
           <Home className="h-4 w-4" />
-          <span className="text-[9px] font-medium tracking-wider uppercase">Top</span>
+          <span className="text-[9px] font-medium tracking-wider uppercase">{t.mobileNav.top}</span>
         </button>
 
         {/* Schedule */}
@@ -51,15 +54,15 @@ export default function MobileNavDock({ onOpenEnvelope }: MobileNavDockProps) {
           className="flex flex-col items-center gap-0.5 text-white/70 hover:text-[#e8c98a] transition"
         >
           <Calendar className="h-4 w-4" />
-          <span className="text-[9px] font-medium tracking-wider uppercase">Events</span>
+          <span className="text-[9px] font-medium tracking-wider uppercase">{t.mobileNav.events}</span>
         </button>
 
         {/* Center Floating Celebration Action Button */}
         <div className="-mt-7">
           <button
             onClick={triggerCelebration}
-            title="Celebrate & Open Invitation"
-            aria-label="Celebrate & Open Invitation"
+            title={t.mobileNav.celebrateTooltip}
+            aria-label={t.mobileNav.celebrateTooltip}
             className="group relative flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#f5dfaa] bg-gradient-to-tr from-[#5c121e] via-[#851b2d] to-[#400b14] text-white shadow-[0_8px_25px_rgba(92,18,30,0.7),0_0_15px_rgba(232,201,138,0.5)] transition-all hover:scale-110 active:scale-95"
           >
             <span className="absolute -inset-1 rounded-full border border-[#e8c98a]/40 animate-ping opacity-60 pointer-events-none" />
@@ -73,7 +76,7 @@ export default function MobileNavDock({ onOpenEnvelope }: MobileNavDockProps) {
           className="flex flex-col items-center gap-0.5 text-white/70 hover:text-[#e8c98a] transition"
         >
           <MapPin className="h-4 w-4" />
-          <span className="text-[9px] font-medium tracking-wider uppercase">Venue</span>
+          <span className="text-[9px] font-medium tracking-wider uppercase">{t.mobileNav.venue}</span>
         </button>
 
         {/* Blessings */}
@@ -82,7 +85,7 @@ export default function MobileNavDock({ onOpenEnvelope }: MobileNavDockProps) {
           className="flex flex-col items-center gap-0.5 text-[#e8c98a] hover:brightness-125 transition"
         >
           <MessageSquareHeart className="h-4 w-4" />
-          <span className="text-[9px] font-bold tracking-wider uppercase">Wishes</span>
+          <span className="text-[9px] font-bold tracking-wider uppercase">{t.mobileNav.blessings}</span>
         </button>
       </nav>
     </div>

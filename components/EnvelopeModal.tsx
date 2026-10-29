@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Heart, ChevronDown } from "lucide-react";
+import { Sparkles, Heart, ChevronDown, Globe } from "lucide-react";
 import { weddingConfig } from "@/config/wedding.config";
 import confetti from "canvas-confetti";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface EnvelopeModalProps {
   onOpen?: () => void;
@@ -21,6 +22,7 @@ export default function EnvelopeModal({
 }: EnvelopeModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
 
   useEffect(() => {
     if (isOpenControlled !== undefined) {
@@ -87,17 +89,27 @@ export default function EnvelopeModal({
         </div>
 
         <div className="relative z-10 flex w-full max-w-lg flex-col items-center">
-          {/* Top greeting badge */}
+          {/* Top greeting badge & Language switcher */}
           <motion.div
             initial={{ y: -15, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="mb-6 flex items-center gap-2 rounded-full border border-[#e8c98a]/30 bg-[#5c121e]/80 px-4 py-1.5 text-xs uppercase tracking-[0.25em] text-[#e8c98a] backdrop-blur-md shadow-lg"
+            className="mb-6 flex items-center justify-between w-full max-w-md px-1 gap-2"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#e8c98a]" />
-            <span>
-              {guestName ? `A Personal Invitation for ${guestName}` : "A Royal Wedding Invitation"}
-            </span>
+            <div className="flex items-center gap-2 rounded-full border border-[#e8c98a]/30 bg-[#5c121e]/80 px-4 py-1.5 text-[11px] sm:text-xs uppercase tracking-[0.2em] text-[#e8c98a] backdrop-blur-md shadow-lg truncate">
+              <Sparkles className="w-3.5 h-3.5 text-[#e8c98a] shrink-0" />
+              <span className="truncate">{t.envelope.badge(guestName)}</span>
+            </div>
+
+            {/* Language Switch Button */}
+            <button
+              onClick={toggleLanguage}
+              title={language === "en" ? "हिंदी में देखें" : "View in English"}
+              className="shrink-0 inline-flex items-center gap-1.5 rounded-full border border-[#e8c98a]/40 bg-[#2b060d]/85 hover:bg-[#5c121e] px-3 py-1.5 text-xs font-semibold tracking-wider text-[#f5dfaa] transition backdrop-blur-md shadow-md active:scale-95"
+            >
+              <Globe className="w-3.5 h-3.5 text-[#e8c98a]" />
+              <span>{language === "en" ? "हिंदी" : "English"}</span>
+            </button>
           </motion.div>
 
           {/* Envelope Container */}
@@ -126,23 +138,23 @@ export default function EnvelopeModal({
               >
                 <div>
                   <p className="font-script text-2xl text-[#8e6c27] md:text-3xl">
-                    Save the Date
+                    {t.envelope.saveTheDate}
                   </p>
                   <h3 className="font-heading text-xl font-bold tracking-wide text-[#5c121e] mt-1 md:text-2xl">
-                    {weddingConfig.couple.groom.firstName} & {weddingConfig.couple.bride.firstName}
+                    {language === "hi" ? "दीपक एवं पूजा" : `${weddingConfig.couple.groom.firstName} & ${weddingConfig.couple.bride.firstName}`}
                   </h3>
                   <div className="mx-auto my-2.5 h-[1px] w-24 bg-gradient-to-r from-transparent via-[#8e6c27] to-transparent" />
                   <p className="font-serif italic text-xs leading-relaxed text-neutral-700 px-2 line-clamp-3 md:line-clamp-none">
-                    &ldquo;{weddingConfig.couple.invitationLetter}&rdquo;
+                    &ldquo;{t.envelope.letter}&rdquo;
                   </p>
                 </div>
 
                 <div className="pt-2 border-t border-[#8e6c27]/20">
                   <p className="font-heading text-sm font-semibold tracking-widest text-[#5c121e]">
-                    {weddingConfig.couple.displayDate}
+                    {t.envelope.displayDate}
                   </p>
                   <p className="text-[11px] uppercase tracking-wider text-neutral-500">
-                    {weddingConfig.couple.city}
+                    {t.envelope.city}
                   </p>
                 </div>
               </motion.div>
@@ -156,8 +168,6 @@ export default function EnvelopeModal({
                 transition={{ duration: 0.8, ease: "easeInOut" }}
                 style={{ transformOrigin: "top" }}
                 className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-[#7a1928] to-[#5c121e] border-b border-[#e8c98a]/40 shadow-md"
-                // Clipped as a triangle flap
-                style-clip="polygon(0 0, 100% 0, 50% 100%)"
               >
                 <div
                   className="w-full h-full"
@@ -188,7 +198,7 @@ export default function EnvelopeModal({
                 >
                   <div className="relative flex h-20 w-20 items-center justify-center rounded-full border-2 border-[#f5dfaa] bg-gradient-to-br from-[#c89c4b] via-[#e8c98a] to-[#9c7225] shadow-[0_8px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(232,201,138,0.4)]">
                     <span className="font-heading text-lg font-black tracking-widest text-[#241704]">
-                      {weddingConfig.couple.groom.firstName[0]}&{weddingConfig.couple.bride.firstName[0]}
+                      {language === "hi" ? "द&पू" : `${weddingConfig.couple.groom.firstName[0]}&${weddingConfig.couple.bride.firstName[0]}`}
                     </span>
                     <Heart className="absolute bottom-2 h-3.5 w-3.5 fill-[#241704] text-[#241704]" />
                   </div>
@@ -197,7 +207,7 @@ export default function EnvelopeModal({
                     transition={{ repeat: Infinity, duration: 1.5 }}
                     className="mt-3 whitespace-nowrap rounded-full bg-black/60 px-3 py-1 font-serif text-[11px] font-medium tracking-widest text-[#f5dfaa] border border-[#e8c98a]/40 backdrop-blur-sm"
                   >
-                    TAP TO BREAK SEAL
+                    {t.envelope.tapToBreak}
                   </motion.span>
                 </motion.div>
               )}
@@ -216,11 +226,11 @@ export default function EnvelopeModal({
                 onClick={handleEnterSite}
                 className="group relative flex items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-[#e8c98a] via-[#f5dfaa] to-[#d4b06a] px-8 py-3.5 font-heading text-sm font-bold uppercase tracking-widest text-[#1a1105] shadow-[0_10px_35px_rgba(232,201,138,0.35)] transition-all duration-300 hover:scale-105 hover:brightness-110"
               >
-                <span>Enter The Celebration</span>
+                <span>{t.envelope.enterCelebration}</span>
                 <ChevronDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
               </button>
               <p className="text-[11px] tracking-widest text-white/50 uppercase">
-                Scroll down to discover the itinerary & RSVP
+                {language === "hi" ? "नीचे स्क्रॉल करके कार्यक्रम विवरण देखें" : "Scroll down to discover the itinerary & RSVP"}
               </p>
             </motion.div>
           ) : (
@@ -229,7 +239,7 @@ export default function EnvelopeModal({
                 onClick={handleEnterSite}
                 className="text-xs uppercase tracking-widest text-white/40 transition hover:text-[#e8c98a]"
               >
-                Skip straight to details →
+                {language === "hi" ? "सीधे विवरण देखें →" : "Skip straight to details →"}
               </button>
             </div>
           )}

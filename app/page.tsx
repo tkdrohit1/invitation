@@ -12,6 +12,7 @@ import BlessingsWall from "@/components/BlessingsWall";
 import AudioPlayer from "@/components/AudioPlayer";
 import FooterSection from "@/components/FooterSection";
 import MobileNavDock from "@/components/MobileNavDock";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 function WeddingInviteContent() {
   const searchParams = useSearchParams();
@@ -20,7 +21,8 @@ function WeddingInviteContent() {
   const [showEnvelope, setShowEnvelope] = useState<boolean | undefined>(undefined);
 
   return (
-    <main className="relative min-h-screen maroon-stars-pattern text-white overflow-x-hidden pb-24">
+    <LanguageProvider>
+      <main className="relative min-h-screen maroon-stars-pattern text-white overflow-x-hidden pb-24">
       {/* 3D Wax Seal Envelope Intro Modal */}
       <EnvelopeModal
         guestName={guestName}
@@ -57,6 +59,7 @@ function WeddingInviteContent() {
       {/* Floating Mobile Bottom Navigation Dock */}
       <MobileNavDock onOpenEnvelope={() => setShowEnvelope(true)} />
     </main>
+    </LanguageProvider>
   );
 }
 

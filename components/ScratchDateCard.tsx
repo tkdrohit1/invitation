@@ -4,8 +4,10 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import { Sparkles, Calendar, CheckCircle2 } from "lucide-react";
 import confetti from "canvas-confetti";
 import { weddingConfig } from "@/config/wedding.config";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ScratchDateCard() {
+  const { t, language } = useLanguage();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [isScratched, setIsScratched] = useState(false);
   const [scratchPercent, setScratchPercent] = useState(0);
@@ -33,22 +35,24 @@ export default function ScratchDateCard() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Decorative Foil text on top of the scratch layer
-    ctx.font = "bold 13px serif";
+    ctx.font = language === "hi" ? "bold 13px sans-serif" : "bold 13px serif";
     ctx.fillStyle = "rgba(40, 25, 5, 0.75)";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("✦ RUB GOLD FOIL TO REVEAL ✦", canvas.width / 2, canvas.height / 2 - 8);
+    ctx.fillText(t.scratchCard.canvasTopText, canvas.width / 2, canvas.height / 2 - 8);
 
     ctx.font = "10px sans-serif";
     ctx.fillStyle = "rgba(40, 25, 5, 0.55)";
-    ctx.fillText("Scratch with your finger or mouse", canvas.width / 2, canvas.height / 2 + 14);
-  }, []);
+    ctx.fillText(t.scratchCard.canvasSubText, canvas.width / 2, canvas.height / 2 + 14);
+  }, [t, language]);
 
   useEffect(() => {
-    initCanvas();
+    if (!isScratched) {
+      initCanvas();
+    }
     window.addEventListener("resize", initCanvas);
     return () => window.removeEventListener("resize", initCanvas);
-  }, [initCanvas]);
+  }, [initCanvas, isScratched]);
 
   const scratch = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current;
@@ -114,16 +118,16 @@ export default function ScratchDateCard() {
         <div className="flex items-center gap-2">
           <Calendar className="h-4 w-4 text-[#e8c98a]" />
           <span className="font-serif text-xs uppercase tracking-[0.2em] text-[#e8c98a]">
-            Save The Date
+            {t.scratchCard.title}
           </span>
         </div>
         <div className="text-[11px] font-medium text-white/50">
           {isScratched ? (
             <span className="inline-flex items-center gap-1 text-[#e8c98a]">
-              <CheckCircle2 className="h-3.5 w-3.5" /> Date Unveiled
+              <CheckCircle2 className="h-3.5 w-3.5" /> {t.scratchCard.dateUnveiled}
             </span>
           ) : (
-            <span>Scratch {scratchPercent}%</span>
+            <span>{t.scratchCard.scratchHint(scratchPercent)}</span>
           )}
         </div>
       </div>
@@ -133,14 +137,14 @@ export default function ScratchDateCard() {
         {/* Underlying Revealed Date Content */}
         <div className="text-center z-0">
           <p className="font-script text-2xl text-[#f5dfaa] mb-1">
-            Forever Begins On
+            {t.scratchCard.revealedSubtitle}
           </p>
           <div className="font-heading text-3xl sm:text-4xl font-extrabold tracking-widest text-white drop-shadow-md">
-            {weddingConfig.couple.displayDate}
+            {t.scratchCard.revealedDate}
           </div>
           <div className="mx-auto my-2 h-[1px] w-20 bg-gradient-to-r from-transparent via-[#e8c98a] to-transparent" />
           <p className="font-serif text-sm tracking-wider uppercase text-[#e8c98a]">
-            {weddingConfig.couple.city}
+            {t.scratchCard.revealedCity}
           </p>
         </div>
 
@@ -172,7 +176,7 @@ export default function ScratchDateCard() {
       <div className="flex items-center justify-between text-xs text-white/60">
         <span className="flex items-center gap-1.5 font-serif italic text-white/70">
           <Sparkles className="h-3.5 w-3.5 text-[#e8c98a]" />
-          Auspicious wedding ceremony
+          {t.scratchCard.bottomHint}
         </span>
         <button
           onClick={() => {
@@ -186,7 +190,7 @@ export default function ScratchDateCard() {
           }}
           className="text-[11px] underline underline-offset-4 text-[#e8c98a]/80 hover:text-[#e8c98a] transition"
         >
-          {isScratched ? "Revealed" : "Reveal date"}
+          {isScratched ? t.scratchCard.revealedBtn : t.scratchCard.revealBtn}
         </button>
       </div>
     </div>
